@@ -1,0 +1,41 @@
+td {
+    border: 1px solid black;
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    transition: all .3s linear;
+
+}
+
+td:hover {
+    background: green;
+    cursor: pointer;
+}
+
+.grey {
+    background-color: black;
+}
+
+.player1 {
+    background-color: aqua;
+}
+
+.player2 {
+    background-color: red;
+}
+
+.armes1 {
+    background-image: url(./../img/arme1.png);
+}
+
+.armes2 {
+    background-image: url(./../img/arme2.png);
+}
+
+.armes3 {
+    background-image: url(./../img/arme3.png);
+}
+
+.armes4 {
+    background-image: url(./../img/arme4.png);
+}
