@@ -63,8 +63,14 @@ class Map {
 						
 						// moves.some permet de vérifer si la celulle cliquée fait parties des déplacements possibles
 						if (moves.some(move => { return move.x === x && move.y === y})) {
-							console.log('Le déplacement est possible !');
-							console.log("Plus qu'a faire le code pour déplacer le joueur !");
+                            let selectedPosition= {x:x , y:y}
+                            let selectedCell =this.getCell(selectedPosition)
+                            $(selectedCell).removeClass()
+                            $(selectedCell).addClass("player player"+(this.currentPlayer+1))
+                            this.getCell (this.players[this.currentPlayer].position).removeClass()
+                            $(".range").removeClass()
+                            this.players[this.currentPlayer].position=selectedPosition
+                            this.getNextPlayer()
 						}
                     })
 
@@ -90,7 +96,6 @@ class Map {
     /**
      * Retourner les coordonnées d'une cellule vide
      */
-
     getRandomPosition() {
         let randomX = Math.floor(Math.random() * this.numberOfCells) // Calculer une valeur aléatoire entre 0 et this.numberOfCells (exclu)
         let randomY = Math.floor(Math.random() * this.numberOfLines) // Calculer une valeur aléatoire entre 0 et this.numberOfLines (exclu)
@@ -187,6 +192,9 @@ class Map {
                 })
             }
         }
+        moves.forEach (element =>{
+            this.getCell(element).addClass("range")
+        })
         return moves;
     }
 }

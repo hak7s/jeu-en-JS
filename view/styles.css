@@ -11,8 +11,10 @@ td:hover {
     background: green;
     cursor: pointer;
 }
-
-.grey {
+.range {
+    background-color: grey
+}
+.black {
     background-color: black;
 }
 
