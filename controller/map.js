@@ -5,26 +5,33 @@ class Map {
         this.numberOfCells = 10 // nombre de cellules par ligne dans la carte
         this.elements = [] // élements de la cartes
 
-        this.createMap() // création de la carte
-        for (var i = 0; i < this.numberOfGreyCells; i++) {
-            this.positionElement(new Black()) // positionnement des blocks noirs
-        }
+        // generation de la carte "création de la carte"
+        this.createMap() 
 
+        // positionnement des blocks noirs
+        for (var i = 0; i < this.numberOfGreyCells; i++) {
+            this.positionElement(new Black()) 
+        }
+        // creation des joueurs
         this.positionElement(new Player('player1 player', 100))
         this.positionElement(new Player('player2 player', 100))
 
+        //creation des armes
         this.positionElement(new Arme('armes1', 10))
         this.positionElement(new Arme('armes2', 20))
         this.positionElement(new Arme('armes3', 30))
         this.positionElement(new Arme('armes4', 40))
 
+        //Filtre les joueurs present dans le tableau element
         this.players = this.elements.filter(function (element) {
             return element instanceof Player
         })
 
+        //Quel joueur debute la partie 
         this.currentPlayer = Math.floor(Math.random() * this.players.length)
 
-        this.showRange(this.players[this.currentPlayer].position) // on affiche dès le début la portée des déplacements du joueur
+        // on affiche dès le début la portée des déplacements du joueur
+        this.showRange(this.players[this.currentPlayer].position) 
 
         // pour ca il nous faut la position du joueur
      
@@ -124,6 +131,7 @@ class Map {
         }
         return false
     }
+    
 // retourne une cellule a partir d'une position 
     getCell(position) {
         return $('table tr:nth(' + position.y + ') td:nth(' + position.x + ')')
@@ -136,6 +144,7 @@ class Map {
         }
         this.showRange(this.players[this.currentPlayer].position)
     }
+
 // fonction sur lequel le joueur peut se deplacer
     getMoves(position){
         let moves = [];
