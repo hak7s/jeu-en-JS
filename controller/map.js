@@ -12,7 +12,7 @@ class Map {
         for (var i = 0; i < this.numberOfGreyCells; i++) {
             this.positionElement(new Black()) 
         }
-        // creation des joueurs
+        //creation des joueurs
         this.positionElement(new Player('player1 player', 100))
         this.positionElement(new Player('player2 player', 100))
 
@@ -43,7 +43,7 @@ class Map {
     showRange(position) {
         let moves= this.getMoves(position);
         moves.forEach (move => {
-            this.getCell(move).addClass("green");
+            this.getCell(move).addClass("range");
         }); 
       
     }
@@ -77,6 +77,7 @@ class Map {
                             $(".range").removeClass("range")
                             this.players[this.currentPlayer].position=selectedPosition
                             this.getNextPlayer()
+                            console.log(this.getCellElement(selectedPosition,Arme))
 						}
                     })
 
@@ -152,8 +153,8 @@ class Map {
                 let cell = this.getCell({
                     x: x,
                     y: position.y,
-                }) // on recupe la cellule qu on analyse
-                if ($(cell).hasClass('grey') || $(cell).hasClass('player')) break // si la case est occupée, pas besoin de checker les cases plus a gauche: le joueur est bloqué ici, on sort donc du for
+                }) // on recupere la cellule qu on analyse
+                if ($(cell).hasClass('black') || $(cell).hasClass('player')) break // si la case est occupée, pas besoin de checker les cases plus a gauche: le joueur est bloqué ici, on sort donc du for
                 else moves.push({
                     x: x,
                     y: position.y,
@@ -167,7 +168,7 @@ class Map {
                         x: position.x,
                         y: y,
                     }) // on recupe la cellule qu on analyse
-                if ($(cell).hasClass('grey') || $(cell).hasClass('player')) break // si la case est occupée, pas besoin de checker les cases plus a gauche: le joueur est bloqué ici, on sort donc du for
+                if ($(cell).hasClass('black') || $(cell).hasClass('player')) break // si la case est occupée, pas besoin de checker les cases plus a gauche: le joueur est bloqué ici, on sort donc du for
                 else moves.push({
                     x: position.x,
                     y: y,
@@ -180,7 +181,7 @@ class Map {
                     x: x,
                     y: position.y,
                 }) // on recupe la cellule qu on analyse
-                if ($(cell).hasClass('grey') || $(cell).hasClass('player')) break // si la case est occupée, pas besoin de checker les cases plus a gauche: le joueur est bloqué ici, on sort donc du for
+                if ($(cell).hasClass('black') || $(cell).hasClass('player')) break // si la case est occupée, pas besoin de checker les cases plus a gauche: le joueur est bloqué ici, on sort donc du for
                 else moves.push({
                     x: x,
                     y: position.y,
@@ -193,16 +194,19 @@ class Map {
                         x: position.x,
                         y: y,
                     }) // on recupe la cellule qu on analyse
-                if ($(cell).hasClass('grey') || $(cell).hasClass('player')) break // si la case est occupée, pas besoin de checker les cases plus a gauche: le joueur est bloqué ici, on sort donc du for
+                if ($(cell).hasClass('black') || $(cell).hasClass('player')) break // si la case est occupée, pas besoin de checker les cases plus a gauche: le joueur est bloqué ici, on sort donc du for
                 else moves.push({
                     x: position.x,
                     y: y,
                 })
             }
         }
-        moves.forEach (element =>{
-            this.getCell(element).addClass("range")
-        })
         return moves;
+    }
+    //recupere position objet
+    getCellElement (position,object){
+        return this.elements.find(function (element) {
+            return element instanceof object && position.x == element.position.x && position.y == element.position.y;
+        })
     }
 }
