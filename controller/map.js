@@ -72,10 +72,9 @@ class Map {
 						if (moves.some(move => { return move.x === x && move.y === y})) {
                             let selectedPosition= {x:x , y:y}
                             let selectedCell =this.getCell(selectedPosition)
-                            $(selectedCell).removeClass()
                             $(selectedCell).addClass("player player"+(this.currentPlayer+1))
-                            this.getCell (this.players[this.currentPlayer].position).removeClass()
-                            $(".range").removeClass()
+                            this.getCell (this.players[this.currentPlayer].position).removeClass("player player"+(this.currentPlayer+1))
+                            $(".range").removeClass("range")
                             this.players[this.currentPlayer].position=selectedPosition
                             this.getNextPlayer()
 						}
