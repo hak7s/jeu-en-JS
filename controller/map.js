@@ -30,19 +30,15 @@ class Map {
         //Quel joueur debute la partie 
         this.currentPlayer = Math.floor(Math.random() * this.players.length)
 
-        // on affiche dès le début la portée des déplacements du joueur
+        // on affiche dès le début la portée des déplacements du joueur ,pour ca il nous faut la position du joueur
         this.showRange(this.players[this.currentPlayer].position) 
-
-        // pour ca il nous faut la position du joueur
-     
     }
 
-    /*
-    Cette fonction showRange(position) permet d affiche la portée des déplacements d un joueur
-    */
+    
+    // Cette fonction showRange(position) permet d affiche la portée des déplacements un joueur
     showRange(position) {
         let moves= this.getMoves(position);
-        moves.forEach (move => {
+        moves.forEach (move => {// recupere toute les valeur du tableau
             this.getCell(move).addClass("range");
         }); 
       
@@ -69,15 +65,25 @@ class Map {
                         let moves = this.getMoves(this.players[this.currentPlayer].position);
 						
 						// moves.some permet de vérifer si la celulle cliquée fait parties des déplacements possibles
-						if (moves.some(move => { return move.x === x && move.y === y})) {
-                            let selectedPosition= {x:x , y:y}
-                            let selectedCell =this.getCell(selectedPosition)
-                            $(selectedCell).addClass("player player"+(this.currentPlayer+1))
-                            this.getCell (this.players[this.currentPlayer].position).removeClass("player player"+(this.currentPlayer+1))
-                            $(".range").removeClass("range")
-                            this.players[this.currentPlayer].position=selectedPosition
-                            this.getNextPlayer()
+						if (moves.some(move => { 
+                            return move.x === x && move.y === y
+                        })) {
+                            let selectedPosition= {
+                                x:x , 
+                                y:y
+                            }
+                            let selectedCell =this.getCell(selectedPosition) // recupere la cellule cliker
+
+                            $(selectedCell).addClass("player player"+(this.currentPlayer+1)) // ajoute sur cette cellule les class player (coloris la cases)
+                            this.getCell (this.players[this.currentPlayer].position).removeClass("player player"+(this.currentPlayer+1))//recupere la cellule du joueur courant et lui retire les classe player(retire la couleur du joueur)
+                            $(".range").removeClass("range")// retire la couleur des case grise ( n'affiche plus la porte "deplacement joueur")
+                            this.players[this.currentPlayer].position=selectedPosition// mets a jour a la position du joueur courant
+                            this.getNextPlayer() // change de joueur
+
+                            
                             console.log(this.getCellElement(selectedPosition,Arme))
+
+                            
 						}
                     })
 
@@ -88,6 +94,7 @@ class Map {
 
         $('#container').append(table)
     }
+
     /**
      * Fonction/Methode chargée de positionner un élément sur la carte à une position aléatoire
      */
@@ -134,7 +141,7 @@ class Map {
     
 // retourne une cellule a partir d'une position 
     getCell(position) {
-        return $('table tr:nth(' + position.y + ') td:nth(' + position.x + ')')
+        return $('table tr:nth(' + position.y + ') td:nth(' + position.x + ')') //recupere dans la table la cellule au coordonnee position.y position.x
     }
 
     getNextPlayer() {
@@ -203,6 +210,7 @@ class Map {
         }
         return moves;
     }
+
     //recupere position objet
     getCellElement (position,object){
         return this.elements.find(function (element) {
