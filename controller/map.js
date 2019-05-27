@@ -13,11 +13,11 @@ class Map {
             this.positionElement(new Black()) 
         }
         //creation des joueurs
-        this.positionElement(new Player('player1 player', 100))
-        this.positionElement(new Player('player2 player', 100))
+        this.positionElement(new Player('player1 player armes1', 100))
+        this.positionElement(new Player('player2 player armes1', 100))
 
         //creation des armes
-        this.positionElement(new Arme('armes1', 10))
+        
         this.positionElement(new Arme('armes2', 20))
         this.positionElement(new Arme('armes3', 30))
         this.positionElement(new Arme('armes4', 40))
@@ -26,7 +26,9 @@ class Map {
         this.players = this.elements.filter(function (element) {
             return element instanceof Player
         })
+        for (let player of this.players){
 
+        }
         //Quel joueur debute la partie 
         this.currentPlayer = Math.floor(Math.random() * this.players.length)
 
@@ -44,6 +46,16 @@ class Map {
       
     }
     
+    movePlayers(selectedPosition){
+        let selectedCell =this.getCell(selectedPosition) // recupere la cellule cliker
+        let armePlayers=this.players[this.currentPlayer].arme
+        console.log(armePlayers);
+        
+        $(selectedCell).addClass("player player"+(this.currentPlayer+1)) // ajoute sur cette cellule les class player (coloris la cases)
+        this.getCell (this.players[this.currentPlayer].position).removeClass("player player"+(this.currentPlayer+1))//recupere la cellule du joueur courant et lui retire les classe player(retire la couleur du joueur)
+        $(".range").removeClass("range")// retire la couleur des case grise ( n'affiche plus la porte "deplacement joueur")
+        this.players[this.currentPlayer].position=selectedPosition// mets a jour a la position du joueur courant
+    }
     /**
      * Fonction chargée de créer la carte (table / tr / td)
      */
@@ -72,18 +84,9 @@ class Map {
                                 x:x , 
                                 y:y
                             }
-                            let selectedCell =this.getCell(selectedPosition) // recupere la cellule cliker
-
-                            $(selectedCell).addClass("player player"+(this.currentPlayer+1)) // ajoute sur cette cellule les class player (coloris la cases)
-                            this.getCell (this.players[this.currentPlayer].position).removeClass("player player"+(this.currentPlayer+1))//recupere la cellule du joueur courant et lui retire les classe player(retire la couleur du joueur)
-                            $(".range").removeClass("range")// retire la couleur des case grise ( n'affiche plus la porte "deplacement joueur")
-                            this.players[this.currentPlayer].position=selectedPosition// mets a jour a la position du joueur courant
-                            this.getNextPlayer() // change de joueur
-
                             
-                            console.log(this.getCellElement(selectedPosition,Arme))
-
-                            
+                            this.movePlayers(selectedPosition)
+                            this.getNextPlayer() // change de joueur               
 						}
                     })
 
