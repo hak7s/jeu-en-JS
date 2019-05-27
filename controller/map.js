@@ -13,11 +13,11 @@ class Map {
             this.positionElement(new Black()) 
         }
         //creation des joueurs
-        this.positionElement(new Player('player1 player armes1', 100))
-        this.positionElement(new Player('player2 player armes1', 100))
+        this.positionElement(new Player('player1 armes1', 100))
+        this.positionElement(new Player('player2 armes1', 100))
 
         //creation des armes
-        
+     
         this.positionElement(new Arme('armes2', 20))
         this.positionElement(new Arme('armes3', 30))
         this.positionElement(new Arme('armes4', 40))
@@ -27,6 +27,7 @@ class Map {
             return element instanceof Player
         })
         for (let player of this.players){
+            player.ajouteArme(new Arme('armes1',10,player.position))
 
         }
         //Quel joueur debute la partie 
@@ -47,14 +48,20 @@ class Map {
     }
     
     movePlayers(selectedPosition){
+        let newArme=this.getCellElement(selectedPosition,Arme)
+
+
         let selectedCell =this.getCell(selectedPosition) // recupere la cellule cliker
         let armePlayers=this.players[this.currentPlayer].arme
-        console.log(armePlayers);
-        
-        $(selectedCell).addClass("player player"+(this.currentPlayer+1)) // ajoute sur cette cellule les class player (coloris la cases)
-        this.getCell (this.players[this.currentPlayer].position).removeClass("player player"+(this.currentPlayer+1))//recupere la cellule du joueur courant et lui retire les classe player(retire la couleur du joueur)
+
+        $(selectedCell).addClass("player"+(this.currentPlayer+1)+" "+armePlayers.classCss) // ajoute sur cette cellule les class player (coloris la cases)
+        this.getCell (this.players[this.currentPlayer].position).removeClass("player"+(this.currentPlayer+1)+" "+armePlayers.classCss)//recupere la cellule du joueur courant et lui retire les classe player(retire la couleur du joueur)
         $(".range").removeClass("range")// retire la couleur des case grise ( n'affiche plus la porte "deplacement joueur")
         this.players[this.currentPlayer].position=selectedPosition// mets a jour a la position du joueur courant
+        this.players[this.currentPlayer].arme.position=selectedPosition
+        if (newArme){
+            this.players[this.currentPlayer].arme=newArme
+        }
     }
     /**
      * Fonction chargée de créer la carte (table / tr / td)
