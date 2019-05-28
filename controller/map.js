@@ -48,7 +48,15 @@ class Map {
     }
     //change les armes quand un player marche sur une arme
     switchArmes(newArme,oldArme){
+        this.elements.push(oldArme)
+        for(let i=0; i<this.elements.length;i++){
+            if(this.elements[i].classCss==newArme.classCss){
+                this.elements.splice(i,1)
+                break
+            }
+        }
         this.players[this.currentPlayer].arme=newArme
+    
     }
 
     movePlayers(selectedPosition){
