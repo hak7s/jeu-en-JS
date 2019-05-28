@@ -46,7 +46,11 @@ class Map {
         }); 
       
     }
-    
+    //change les armes quand un player marche sur une arme
+    switchArmes(newArme,oldArme){
+        this.players[this.currentPlayer].arme=newArme
+    }
+
     movePlayers(selectedPosition){
         let newArme=this.getCellElement(selectedPosition,Arme)
 
@@ -56,14 +60,14 @@ class Map {
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        
+
         $(selectedCell).addClass("player"+(this.currentPlayer+1)+" "+armePlayers.classCss) // ajoute sur cette cellule les class player (coloris la cases)
         this.getCell (this.players[this.currentPlayer].position).removeClass("player"+(this.currentPlayer+1)+" "+armePlayers.classCss)//recupere la cellule du joueur courant et lui retire les classe player(retire la couleur du joueur)
         $(".range").removeClass("range")// retire la couleur des case grise ( n'affiche plus la porte "deplacement joueur")
         this.players[this.currentPlayer].position=selectedPosition// mets a jour a la position du joueur courant
         this.players[this.currentPlayer].arme.position=selectedPosition
         if (newArme){
-            this.players[this.currentPlayer].arme=newArme
+            this.switchArmes(newArme,armePlayers)
         }
     }
     /**
