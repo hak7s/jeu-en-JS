@@ -26,9 +26,8 @@ td:hover {
     background-color: red;
 }
 
-.armes1 {
+.armes1,.armes1_1 {
     background-image: url(./../img/arme1.png);
-
 }
 
 .armes2 {

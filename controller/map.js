@@ -13,8 +13,8 @@ class Map {
             this.positionElement(new Black()) 
         }
         //creation des joueurs
-        this.positionElement(new Player('player1 armes1', 100))
-        this.positionElement(new Player('player2 armes1', 100))
+        this.positionElement(new Player('player1  player armes1', 100))
+        this.positionElement(new Player('player2 player armes1_1', 100))
 
         //creation des armes
      
@@ -26,16 +26,20 @@ class Map {
         this.players = this.elements.filter(function (element) {
             return element instanceof Player
         })
-        for (let player of this.players){
-            player.ajouteArme(new Arme('armes1',10,player.position))
+        
+            this.players[0].ajouteArme(new Arme('armes1',10,this.players[0].position))
+            this.players[1].ajouteArme(new Arme('armes1_1',10,this.players[1].position))
 
-        }
         //Quel joueur debute la partie 
         this.currentPlayer = Math.floor(Math.random() * this.players.length)
 
         // on affiche dès le début la portée des déplacements du joueur ,pour ca il nous faut la position du joueur
         this.showRange(this.players[this.currentPlayer].position) 
+
+        console.log(this);
+        
     }
+
 
     
     // Cette fonction showRange(position) permet d affiche la portée des déplacements un joueur
@@ -55,8 +59,8 @@ class Map {
                 break
             }
         }
-        this.players[this.currentPlayer].arme=newArme
-    
+        this.players[this.currentPlayer].arme=newArme //changement armes 
+        $(this.getCell(oldArme.position)).addClass(oldArme.classCss) // changement armes sur le plateau
     }
 
     movePlayers(selectedPosition){
@@ -69,8 +73,8 @@ class Map {
         ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-        $(selectedCell).addClass("player"+(this.currentPlayer+1)+" "+armePlayers.classCss) // ajoute sur cette cellule les class player (coloris la cases)
-        this.getCell (this.players[this.currentPlayer].position).removeClass("player"+(this.currentPlayer+1)+" "+armePlayers.classCss)//recupere la cellule du joueur courant et lui retire les classe player(retire la couleur du joueur)
+        $(selectedCell).addClass("player player"+(this.currentPlayer+1)+" "+armePlayers.classCss) // ajoute sur cette cellule les class player (coloris la cases)
+        this.getCell (this.players[this.currentPlayer].position).removeClass("player player"+(this.currentPlayer+1)+" "+armePlayers.classCss)//recupere la cellule du joueur courant et lui retire les classe player(retire la couleur du joueur)
         $(".range").removeClass("range")// retire la couleur des case grise ( n'affiche plus la porte "deplacement joueur")
         this.players[this.currentPlayer].position=selectedPosition// mets a jour a la position du joueur courant
         this.players[this.currentPlayer].arme.position=selectedPosition
@@ -242,4 +246,16 @@ class Map {
             return element instanceof object && position.x == element.position.x && position.y == element.position.y;
         })
     }
+
+    playerJuxtapose(){
+        let position_p1=this.players[0].position
+        let position_p2=this.players[1].position
+        return (
+            position_p1.x == position_p2.x && position_p1.y-1 == position_p2.y ||
+            position_p1.x == position_p2.x && position_p1.y+1 == position_p2.y ||
+            position_p1.x-1 == position_p2.x && position_p1.y == position_p2.y ||
+            position_p1.x+1 == position_p2.x && position_p1.y == position_p2.y 
+        )
+    }
+    
 }
