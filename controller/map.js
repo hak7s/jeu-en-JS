@@ -1,5 +1,6 @@
 class Map {
     constructor() {
+        this.fight=false
         this.numberOfGreyCells = 10 // nombre de cellules grisées dans la carte
         this.numberOfLines = 10 // nombre de lignes dans la carte
         this.numberOfCells = 10 // nombre de cellules par ligne dans la carte
@@ -18,19 +19,19 @@ class Map {
 
         //creation des armes
      
-        this.positionElement(new Arme('armes2', 20 , "fusil a pompe"))
-        this.positionElement(new Arme('armes3', 30 , "Canon scie ")) 
-        this.positionElement(new Arme('armes4',30 , "mitraiellette"))
+        this.positionElement(new Arme('armes2', 15 , "Fusil"))
+        this.positionElement(new Arme('armes3', 20 , "fusil à pompe")) 
+        this.positionElement(new Arme('armes4',25 , "Lance-roquette"))
 
         //Filtre les joueurs present dans le tableau element
         this.players = this.elements.filter(function (element) {
             return element instanceof Player
         })
         
-            this.players[0].ajouteArme(new Arme('armes1',10, "revolver", this.players[0].position))
+            this.players[0].ajouteArme(new Arme('armes1',10, "Revolver", this.players[0].position))
             $(".sante-p1").html(this.players[0].sante)
             $(".arme-p1").html(this.players[0].arme.name)
-            this.players[1].ajouteArme(new Arme('armes1_1',10,"revolver", this.players[1].position))
+            this.players[1].ajouteArme(new Arme('armes1_1',10,"Revolver", this.players[1].position))
             $(".sante-p2").html(this.players[1].sante)
             $(".arme-p2").html(this.players[1].arme.name)
 
@@ -40,8 +41,6 @@ class Map {
         // on affiche dès le début la portée des déplacements du joueur ,pour ca il nous faut la position du joueur
         this.showRange(this.players[this.currentPlayer].position) 
 
-        
-        
     }
 
     // Cette fonction showRange(position) permet d affiche la portée des déplacements un joueur
@@ -61,7 +60,8 @@ class Map {
                 break
             }
         }
-        this.players[this.currentPlayer].arme=newArme //changement armes 
+        this.players[this.currentPlayer].arme=newArme //changement armes
+        $(".arme-p"+(this.currentPlayer+1)).html(newArme.name)
         $(this.getCell(oldArme.position)).addClass(oldArme.classCss) // changement armes sur le plateau
     }
 
@@ -100,8 +100,8 @@ class Map {
                         // on récupère la celulle cliquée avec event.target
 						let x = $(event.target).data('x'); 
                         let y = $(event.target).data('y');
-						
-						// récupères les déplacements possible
+						if (!this.fight){
+                        // récupères les déplacements possible
                         let moves = this.getMoves(this.players[this.currentPlayer].position);
 						
 						// moves.some permet de vérifer si la celulle cliquée fait parties des déplacements possibles
@@ -115,10 +115,12 @@ class Map {
                             
                             this.movePlayers(selectedPosition)
                             if (this.playerJuxtapose()){
-                                console.log("ok")
+                                this.fight=true
                             }
                             this.getNextPlayer() // change de joueur               
 						}
+                        }
+						
                     })
 
                 tr.append(td)
@@ -183,6 +185,7 @@ class Map {
         if (this.currentPlayer >= this.players.length) {
             this.currentPlayer = 0
         }
+        if(!this.fight)
         this.showRange(this.players[this.currentPlayer].position)
     }
 
