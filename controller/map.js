@@ -18,17 +18,21 @@ class Map {
 
         //creation des armes
      
-        this.positionElement(new Arme('armes2', 20))
-        this.positionElement(new Arme('armes3', 30))
-        this.positionElement(new Arme('armes4', 40))
+        this.positionElement(new Arme('armes2', 20 , "fusil a pompe"))
+        this.positionElement(new Arme('armes3', 30 , "Canon scie ")) 
+        this.positionElement(new Arme('armes4',30 , "mitraiellette"))
 
         //Filtre les joueurs present dans le tableau element
         this.players = this.elements.filter(function (element) {
             return element instanceof Player
         })
         
-            this.players[0].ajouteArme(new Arme('armes1',10,this.players[0].position))
-            this.players[1].ajouteArme(new Arme('armes1_1',10,this.players[1].position))
+            this.players[0].ajouteArme(new Arme('armes1',10, "revolver", this.players[0].position))
+            $(".sante-p1").html(this.players[0].sante)
+            $(".arme-p1").html(this.players[0].arme.name)
+            this.players[1].ajouteArme(new Arme('armes1_1',10,"revolver", this.players[1].position))
+            $(".sante-p2").html(this.players[1].sante)
+            $(".arme-p2").html(this.players[1].arme.name)
 
         //Quel joueur debute la partie 
         this.currentPlayer = Math.floor(Math.random() * this.players.length)
@@ -36,12 +40,10 @@ class Map {
         // on affiche dès le début la portée des déplacements du joueur ,pour ca il nous faut la position du joueur
         this.showRange(this.players[this.currentPlayer].position) 
 
-        console.log(this);
+        
         
     }
 
-
-    
     // Cette fonction showRange(position) permet d affiche la portée des déplacements un joueur
     showRange(position) {
         let moves= this.getMoves(position);
@@ -112,6 +114,9 @@ class Map {
                             }
                             
                             this.movePlayers(selectedPosition)
+                            if (this.playerJuxtapose()){
+                                console.log("ok")
+                            }
                             this.getNextPlayer() // change de joueur               
 						}
                     })

@@ -19,11 +19,12 @@ td:hover {
 }
 
 .player1 {
-    background-color: aqua;
+    background-color: #9ea9f0
+    ;
 }
 
 .player2 {
-    background-color: red;
+    background-color:#67eaca;
 }
 
 .armes1,.armes1_1 {
