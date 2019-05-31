@@ -56,6 +56,7 @@ class Map {
     }
     attaque(player){
         if(this.fight){
+            if(player != this.currentPlayer)return
             let ennemi=player+1>=this.players.length?0:player+1
             if (this.players[ennemi].defendre){
                 this.players[ennemi].sante-=this.players[player].arme.degat/2
@@ -71,6 +72,8 @@ class Map {
 
     }
     defendre(player){
+        if(!this.fight)return
+        if(player != this.currentPlayer)return
         this.players[player].defendre=true
         this.getNextPlayer()
         
@@ -214,6 +217,21 @@ class Map {
     }
 
     getNextPlayer() {
+        if(this.fight){
+            this.winner=null
+            if(this.players[0].sante <= 0){
+                this.winner = 1
+            }
+            if (this.player[1].sante <= 0){
+                this.winner = 0
+            }
+            if(this.winner){
+
+                alert(" Le joueur "+(this.winner+1)+" a gagner") 
+                return
+
+            }
+        }
         this.currentPlayer++
         if (this.currentPlayer >= this.players.length) {
             this.currentPlayer = 0
