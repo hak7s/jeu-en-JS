@@ -41,6 +41,39 @@ class Map {
         // on affiche dès le début la portée des déplacements du joueur ,pour ca il nous faut la position du joueur
         this.showRange(this.players[this.currentPlayer].position) 
 
+        $(".attaque-p1").click(()=>{
+            this.attaque(0)
+        })
+        $(".attaque-p2").click(()=>{
+            this.attaque(1)
+        })
+        $(".defendre-p1").click(()=>{
+            this.defendre(0)
+        })
+        $(".defendre-p2").click(()=>{
+            this.defendre(1)
+        })
+    }
+    attaque(player){
+        if(this.fight){
+            let ennemi=player+1>=this.players.length?0:player+1
+            if (this.players[ennemi].defendre){
+                this.players[ennemi].sante-=this.players[player].arme.degat/2
+                this.players[ennemi].defendre=false
+            }
+            else {
+                this.players[ennemi].sante-=this.players[player].arme.degat
+            }
+            this.getNextPlayer()
+            $(".sante-p1").html(this.players[0].sante)
+            $(".sante-p2").html(this.players[1].sante)
+        }
+
+    }
+    defendre(player){
+        this.players[player].defendre=true
+        this.getNextPlayer()
+        
     }
 
     // Cette fonction showRange(position) permet d affiche la portée des déplacements un joueur
