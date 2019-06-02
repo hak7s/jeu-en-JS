@@ -15,15 +15,14 @@ class Map {
         }
 
         //creation des joueurs
-        this.positionElement(new Player('player1  player armes1',100))
-        this.positionElement(new Player('player2 player armes1_1',100))
+        this.positionElement(new Player('player1  player armes1',100));
+        this.positionElement(new Player('player2 player armes1_1',100));
 
         //creation des armes
-
-        this.positionElement(new Arme('armes2',15,'Fusil'))
-        this.positionElement(new Arme('armes3',20,'fusil à pompe'))
-        this.positionElement(new Arme('armes4',25,'Lance-roquette'))
-
+        this.positionElement(new Arme('armes2',15,'Fusil'));
+        this.positionElement(new Arme('armes3',20,'Fusil à pompe'));
+        this.positionElement(new Arme('armes4',25,'Lance-roquette'));
+        
         //Filtre les joueurs present dans le tableau element
         this.players = this.elements.filter(function (element) {
                 return element instanceof Player
@@ -32,6 +31,7 @@ class Map {
         this.players[0].ajouteArme(new Arme('armes1',10,'Revolver',this.players[0].position))
         $('.sante-p1').html(this.players[0].sante)
         $('.arme-p1').html(this.players[0].arme.name)
+
         this.players[1].ajouteArme(new Arme('armes1_1',10,'Revolver',this.players[1].position))
         $('.sante-p2').html(this.players[1].sante)
         $('.arme-p2').html(this.players[1].arme.name)
@@ -68,8 +68,7 @@ class Map {
             } else {
                 this.players[ennemi].sante -= this.players[player].arme.degat // sinon, il prend tous les dégats
             }
-            this.getNextPlayer() // on change de joueur..
-
+            this.getNextPlayer() // on change de joueur
             $('.sante-p' + (ennemi + 1)).html(this.players[ennemi].sante) // et on met a jour la santé de l ennemi (la seule santé qui a été modifié)
         }
 
