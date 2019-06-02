@@ -1,7 +1,7 @@
 class Map {
     constructor() {
         this.fight = false
-        this.numberOfGreyCells = 10 // nombre de cellules grisées dans la carte
+        this.numberOfGreyCells = 15 // nombre de cellules grisées dans la carte
         this.numberOfLines = 10 // nombre de lignes dans la carte
         this.numberOfCells = 10 // nombre de cellules par ligne dans la carte
         this.elements = [] // élements de la cartes
