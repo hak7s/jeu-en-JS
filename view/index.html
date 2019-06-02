@@ -21,31 +21,43 @@
   </div>
 
   <div class="row">
-      <div class="col center-game"> 
-          <div id="container"> </div>
+      <div class="col"> 
+          <div id="container" class="center-game"> </div>
       </div>
     </div>
-  
+    <div class="row">
+      <div class="col"></div>
+        <div class="col text-center"> 
+            <div id="joueur1" class="joueurClass player1" > 
+
+                <p>joueur 1</p>
+                <p>Santé : <span class ="sante-p1" ></span></p>
+                <p>Arme : <span class ="arme-p1" ></span></p>
+                <button class="attaque-p1">Attaquer</button>
+                <button class="defendre-p1">Defendre</button>
+              </div>
+        </div>
+        <div class="col"></div>
+        <div class="col text-center"> 
+
+                <div id="joueur2" class="joueurClass player2">
+                    <p>Joueur 2</p>
+                    <p>Santé :<span class ="sante-p2" ></span></p>
+                    <p>Arme : <span class ="arme-p2" ></span></p>
+                    <button class="attaque-p2">Attaquer</button>
+                    <button class="defendre-p2">Defendre</button>
+                  </div>
+        </div>
+        <div class="col"></div>
+
+      </div>
   <div id="contenu">
 
 
-    <div id="joueur1" class="joueurClass player1" > 
-
-      <p>joueur 1</p>
-      <p>Santé : <span class ="sante-p1" ></span></p>
-      <p>Arme : <span class ="arme-p1" ></span></p>
-      <button class="attaque-p1">Attaquer</button>
-      <button class="defendre-p1">Defendre</button>
-    </div>
+    
 
 
-    <div id="joueur2" class="joueurClass player2">
-      <p>Joueur 2</p>
-      <p>Santé :<span class ="sante-p2" ></span></p>
-      <p>Arme : <span class ="arme-p2" ></span></p>
-      <button class="attaque-p2">Attaquer</button>
-      <button class="defendre-p2">Defendre</button>
-    </div>
+   
 </body>
 <script src="./../model/element.js"></script>
 <script src="./../model/arme.js"></script>

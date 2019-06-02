@@ -11,6 +11,11 @@ td {
 body{
     background-color: white
 }
+.center-game{
+    left: 50%;
+    position: relative;
+    margin-left: -250px;
+}
 
 td:hover {
     background: green;
