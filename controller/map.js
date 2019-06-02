@@ -49,8 +49,12 @@ class Map {
         // le joueur 1 (0 dans le tableau des joueur) se defend
         $('.defendre-p1').click(() => {this.defendre(0)})
         $('.defendre-p2').click(() => {this.defendre(1)})
-    
+
+        //modal
+        $("#info modal-body").html("Le joueur "+(this.currentPlayer+1)+" commence")
+        $("#info").modal({show:true})
     }
+
     attaque(player) {
         // le joueur qui attaque (player) attaque si ...
         if (this.fight) { // il y a un combat

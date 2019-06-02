@@ -5,59 +5,85 @@
   <meta charset="utf-8">
   <title>Jeu de Plateau</title>
 
-<link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+
 
 </head>
 
 <body>
   <div class="row">
-    <div class="col text-center"> 
-        <h1> Jeu de plateau tour par tour en JS</h1>
+    <div class="col text-center">
+      <h1> Jeu de plateau tour par tour en JS</h1>
     </div>
   </div>
 
   <div class="row">
-      <div class="col"> 
-          <div id="container" class="center-game"> </div>
+    <div class="col">
+      <div id="container" class="center-game"> </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col text-center">
+      <div id="joueur1" class="joueurClass player1">
+
+        <p>joueur 1</p>
+        <p>Santé : <span class="sante-p1"></span></p>
+        <p>Arme : <span class="arme-p1"></span></p>
+        <button class="attaque-p1">Attaquer</button>
+        <button class="defendre-p1">Defendre</button>
       </div>
     </div>
-    <div class="row">
-      <div class="col"></div>
-        <div class="col text-center"> 
-            <div id="joueur1" class="joueurClass player1" > 
+    <div class="col"></div>
+    <div class="col text-center">
 
-                <p>joueur 1</p>
-                <p>Santé : <span class ="sante-p1" ></span></p>
-                <p>Arme : <span class ="arme-p1" ></span></p>
-                <button class="attaque-p1">Attaquer</button>
-                <button class="defendre-p1">Defendre</button>
-              </div>
-        </div>
-        <div class="col"></div>
-        <div class="col text-center"> 
-
-                <div id="joueur2" class="joueurClass player2">
-                    <p>Joueur 2</p>
-                    <p>Santé :<span class ="sante-p2" ></span></p>
-                    <p>Arme : <span class ="arme-p2" ></span></p>
-                    <button class="attaque-p2">Attaquer</button>
-                    <button class="defendre-p2">Defendre</button>
-                  </div>
-        </div>
-        <div class="col"></div>
-
+      <div id="joueur2" class="joueurClass player2">
+        <p>Joueur 2</p>
+        <p>Santé :<span class="sante-p2"></span></p>
+        <p>Arme : <span class="arme-p2"></span></p>
+        <button class="attaque-p2">Attaquer</button>
+        <button class="defendre-p2">Defendre</button>
       </div>
-  <div id="contenu">
+    </div>
+    <div class="col"></div>
+
+  </div>
+  <div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Jeu tour par tour JS</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          bonjour mehdi
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
-    
 
 
-   
+
+
 </body>
 <script src="./../model/element.js"></script>
 <script src="./../model/arme.js"></script>
