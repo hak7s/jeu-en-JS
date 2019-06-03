@@ -133,6 +133,7 @@ class Map {
             let tr = $('<tr/>')
             for (let x = 0; x < this.numberOfCells; x++) {
                 let td = $('<td/>')
+
                     .data('x', x)
                     .data('y', y)
                     .hover(function () {}, function () {})
@@ -140,6 +141,7 @@ class Map {
                         // on récupère la celulle cliquée avec event.target
                         let x = $(event.target).data('x');
                         let y = $(event.target).data('y');
+
                         if (!this.fight) {
                             // récupères les déplacements possible
                             let moves = this.getMoves(this.players[this.currentPlayer].position);
@@ -329,7 +331,7 @@ class Map {
         return moves;
     }
 
-    //recupere position objet
+    // position objet
     getCellElement(position, object) {
         return this.elements.find(function (element) {
             return element instanceof object && position.x == element.position.x && position.y == element.position.y;
