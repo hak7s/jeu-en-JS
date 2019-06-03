@@ -51,7 +51,7 @@ class Map {
         $('.defendre-p2').click(() => {this.defendre(1)})
 
         //modal
-        $("#info modal-body").html("Le joueur "+(this.currentPlayer+1)+" commence")
+        $("#info .modal-body").html("Le joueur "+(this.currentPlayer+1)+" commence")
         $("#info").modal({show:true})
     }
 
@@ -156,7 +156,10 @@ class Map {
                                 this.movePlayers(selectedPosition)
                                 if (this.playerJuxtapose()) {
                                     this.fight = true
+                                    $("#info .modal-body").html("Le joueur "+(this.currentPlayer+1)+" lance un combat")
+                                    $("#info").modal({show:true})
                                 }
+                                if (!this.fight)
                                 this.getNextPlayer() // change de joueur               
                             }
                         }
@@ -232,7 +235,8 @@ class Map {
             }
             if (this.winner) { // si il y a un winner (donc que l un des deux joueurs à une santé <= 0)
 
-                alert(" Le joueur " + (this.winner + 1) + " a gagner") // on écrit qu il a gagné et on sort
+                $("#info .modal-body").html("Le joueur "+(this.winner+1)+" a gagner")
+                $("#info").modal({show:true})
                 this.currentPlayer = -1 // comme ca on est sur que plus personne peut jouer
                 return
 
