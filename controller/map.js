@@ -54,7 +54,7 @@ class Map {
         $("#info .modal-body").html("Le joueur "+(this.currentPlayer+1)+" commence")
         $("#info").modal({show:true})
     }
-
+    
     attaque(player) {
         // le joueur qui attaque (player) attaque si ...
         if (this.fight) { // il y a un combat
@@ -177,14 +177,34 @@ class Map {
     /**
      * Fonction/Methode chargée de positionner un élément sur la carte à une position aléatoire
      */
+    // position du joueur aleatoire
     positionElement(element) {
         let position = this.getRandomPosition()
+        if (element instanceof Player){
+            while(this.getCellElement({
+                x:position.x,
+                y:position.y-1,
+            },Player)!=undefined || this.getCellElement({
+                x:position.x,
+                y:position.y+1,
+            },Player)!=undefined || this.getCellElement({
+                x:position.x-1,
+                y:position.y,
+            },Player)!=undefined || this.getCellElement({
+                x:position.x+1,
+                y:position.y,
+            },Player)!=undefined ){
+                position = this.getRandomPosition()
+            }
+        }
         element.position = position
         this.elements.push(element)
 
         let cell = this.getCell(position)
         cell.addClass(element.classCss) // ajouter la class(css) className à la cellule
+        
     }
+
 
     /**
      * Retourner les coordonnées d'une cellule vide
