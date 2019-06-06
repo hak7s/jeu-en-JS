@@ -15,7 +15,7 @@ class Map {
         }
 
         //creation des joueurs
-        this.positionElement(new Player('player1  player armes1',100));
+        this.positionElement(new Player('player1  player armes1',100)); 
         this.positionElement(new Player('player2 player armes1_1',100));
 
         //creation des armes
@@ -55,7 +55,7 @@ class Map {
         $("#info").modal({show:true})
     }
     
-    attaque(player) {
+    attaque(player) { // cette fonction permet au joueur courrant d attaquer l autre
         // le joueur qui attaque (player) attaque si ...
         if (this.fight) { // il y a un combat
             if (player != this.currentPlayer) return // si le joueur attaque alors que ce n est pas son tour de jeu, on sort de la fonction
@@ -77,7 +77,7 @@ class Map {
         }
 
     }
-    defendre(player) {
+    defendre(player) { // cette fonction permet au joueur courrant de se défendre
         if (!this.fight) return /// si pas de combat, on sort de la fonction
         if (player != this.currentPlayer) return // si ce n'est pas le tour du joueur , on sort de la fonction
         this.players[player].defendre = true // sinon, le joueur se defend
@@ -107,7 +107,7 @@ class Map {
         $(this.getCell(oldArme.position)).addClass(oldArme.classCss) // changement armes sur le plateau
     }
 
-    movePlayers(selectedPosition) {
+    movePlayers(selectedPosition) { // cette fonction gere le déplacement graphique du joueur, et met a jour sa position dans les données du jeu. Elle change également d arme si le joueur marche sur une arme
         let newArme = this.getCellElement(selectedPosition, Arme)
         let selectedCell = this.getCell(selectedPosition) // recupere la cellule cliker
         let armePlayers = this.players[this.currentPlayer].arme
@@ -127,7 +127,7 @@ class Map {
     /**
      * Fonction chargée de créer la carte (table / tr / td)
      */
-    createMap() {
+    createMap() { // créer la carte et gere les actions qui peuvent etre executées sur la carte (click)
         let table = $('<table/>')
         for (let y = 0; y < this.numberOfLines; y++) {
             let tr = $('<tr/>')
@@ -245,6 +245,7 @@ class Map {
         return $('table tr:nth(' + position.y + ') td:nth(' + position.x + ')') //recupere dans la table la cellule au coordonnee position.y position.x
     }
 
+    // change de joueur et vérifie si il y a un gagnant
     getNextPlayer() {
         if (this.fight) { // si il y  a un combat
 
@@ -272,7 +273,7 @@ class Map {
             this.showRange(this.players[this.currentPlayer].position)
     }
 
-    // fonction sur lequel le joueur peut se deplacer
+    // retourne les positions des cases sur lesquelles le joueur peut se déplacer
     getMoves(position) {
         let moves = [];
         for (let x = position.x - 1; x >= position.x - 3; x--) {
@@ -331,13 +332,14 @@ class Map {
         return moves;
     }
 
-    // position objet
+    // renvois l element avec la classe "objet" a la position spécifiée
     getCellElement(position, object) {
         return this.elements.find(function (element) {
             return element instanceof object && position.x == element.position.x && position.y == element.position.y;
         })
     }
 
+    // renvois vrai si les deux joueur sont cote a cote
     playerJuxtapose() {
         let position_p1 = this.players[0].position
         let position_p2 = this.players[1].position
