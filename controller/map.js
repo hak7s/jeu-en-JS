@@ -1,5 +1,6 @@
 class Map {
     constructor() {
+        $("#joueur1 button,#joueur2 button").hide()
         this.fight = false
         this.numberOfGreyCells = 15 // nombre de cellules grisées dans la carte
         this.numberOfLines = 10 // nombre de lignes dans la carte
@@ -155,6 +156,7 @@ class Map {
                                 this.movePlayers(selectedPosition)
                                 if (this.playerJuxtapose()) {
                                     this.fight = true
+                                    $("#joueur1 button,#joueur2 button").show()
                                     $("#info .modal-body").html("Le joueur "+(this.currentPlayer+1)+" lance un combat")
                                     $("#info").modal({show:true})
                                 }
@@ -245,6 +247,13 @@ class Map {
     // change de joueur et vérifie si il y a un gagnant
     getNextPlayer() {
         if (this.fight) { // si il y  a un combat
+            let ennemi
+            if (this.currentPlayer == 0)
+                ennemi = 1
+            else
+                ennemi = 0
+
+            $("#joueur"+(ennemi)+" button").hide()
 
             this.winner = null // le winner n est pas défini
             if (this.players[0].sante <= 0) { // si la santé du premier joueur est a 0 ou en dessous
@@ -253,7 +262,7 @@ class Map {
             if (this.players[1].sante <= 0) { // et vice versa
                 this.winner = 0
             }
-            if (this.winner) { // si il y a un winner (donc que l un des deux joueurs à une santé <= 0)
+            if (this.winner !==null) { // si il y a un winner (donc que l un des deux joueurs à une santé <= 0)
 
                 $("#info .modal-body").html("Le joueur "+(this.winner+1)+" a gagner")
                 $("#info").modal({show:true})
