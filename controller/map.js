@@ -30,11 +30,11 @@ class Map {
 
         this.players[0].ajouteArme(new Arme('armes1',10,'Revolver',this.players[0].position))
         $('.sante-p1').html(this.players[0].sante)
-        $('.arme-p1').html(this.players[0].arme.name)
+        $('.arme-p1').html(this.players[0].arme.name + " " +this.players[0].arme.degat+" degats")
 
         this.players[1].ajouteArme(new Arme('armes1_1',10,'Revolver',this.players[1].position))
         $('.sante-p2').html(this.players[1].sante)
-        $('.arme-p2').html(this.players[1].arme.name)
+        $('.arme-p2').html(this.players[1].arme.name+ " " +this.players[1].arme.degat+" degats")
 
         //Quel joueur debute la partie
         this.currentPlayer = Math.floor(Math.random() * this.players.length)
@@ -103,7 +103,7 @@ class Map {
             }
         }
         this.players[this.currentPlayer].arme = newArme //changement armes
-        $(".arme-p" + (this.currentPlayer + 1)).html(newArme.name)
+        $(".arme-p" + (this.currentPlayer + 1)).html(newArme.name + " " +newArme.degat+" degats")
         $(this.getCell(oldArme.position)).addClass(oldArme.classCss) // changement armes sur le plateau
     }
 
