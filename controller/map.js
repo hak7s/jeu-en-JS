@@ -112,9 +112,6 @@ class Map {
         let selectedCell = this.getCell(selectedPosition) // recupere la cellule cliker
         let armePlayers = this.players[this.currentPlayer].arme
 
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
         $(selectedCell).addClass("player player" + (this.currentPlayer + 1) + " " + armePlayers.classCss) // ajoute sur cette cellule les class player (coloris la cases)
         this.getCell(this.players[this.currentPlayer].position).removeClass("player player" + (this.currentPlayer + 1) + " " + armePlayers.classCss) //recupere la cellule du joueur courant et lui retire les classe player(retire la couleur du joueur)
         $(".range").removeClass("range") // retire la couleur des case grise ( n'affiche plus la porte "deplacement joueur")
