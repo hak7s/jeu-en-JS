@@ -122,9 +122,7 @@ class Map {
             this.switchArmes(newArme, armePlayers)
         }
     }
-    /**
-     * Fonction chargée de créer la carte (table / tr / td)
-     */
+    
     createMap() { // créer la carte et gere les actions qui peuvent etre executées sur la carte (click)
         let table = $('<table/>')
         for (let y = 0; y < this.numberOfLines; y++) {
