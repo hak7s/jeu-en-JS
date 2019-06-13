@@ -119,9 +119,7 @@ class Map {
             this.switchArmes(newArme, armePlayers)
         }
     }
-    /**
-     * Fonction chargée de créer la carte (table / tr / td)
-     */
+    
     createMap() { // créer la carte et gere les actions qui peuvent etre executées sur la carte (click)
         let table = $('<table/>')
         for (let y = 0; y < this.numberOfLines; y++) {
@@ -131,7 +129,6 @@ class Map {
 
                     .data('x', x)
                     .data('y', y)
-                    .hover(function () {}, function () {})
                     .click(event => { // fonction fléchée pour ne pas redéfinir la variable this
                         // on récupère la celulle cliquée avec event.target
                         let x = $(event.target).data('x');
@@ -153,7 +150,7 @@ class Map {
                                 this.movePlayers(selectedPosition)
                                 if (this.playerJuxtapose()) {
                                     this.fight = true
-                                    $("#joueur1 button,#joueur2 button").show()
+                                    $("#joueur"+(this.currentPlayer + 1)+" button").show()
                                     $("#info .modal-body").html("Le joueur "+(this.currentPlayer+1)+" lance un combat")
                                     $("#info").modal({show:true})
                                 }
@@ -249,7 +246,9 @@ class Map {
             else
                 ennemi = 0
 
-            $("#joueur"+(ennemi)+" button").hide()
+            // cache et affiche les bouton de chaque joueur suivant l'action
+            $("#joueur"+(ennemi + 1)+" button").show()
+            $("#joueur"+(this.currentPlayer + 1)+" button").hide()
 
             this.winner = null // le winner n est pas défini
             if (this.players[0].sante <= 0) { // si la santé du premier joueur est a 0 ou en dessous
