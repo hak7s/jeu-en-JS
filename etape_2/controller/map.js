@@ -205,8 +205,8 @@ class Map {
         if (this.currentPlayer >= this.players.length) {
             this.currentPlayer = 0
         }
-        if (!this.fight)
-            this.showRange(this.players[this.currentPlayer].position)
+
+        this.showRange(this.players[this.currentPlayer].position)
     }
 
     // retourne les positions des cases sur lesquelles le joueur peut se déplacer
@@ -275,16 +275,6 @@ class Map {
         })
     }
 
-    // renvois vrai si les deux joueur sont cote a cote
-    playerJuxtapose() {
-        let position_p1 = this.players[0].position
-        let position_p2 = this.players[1].position
-        return (
-            position_p1.x == position_p2.x && position_p1.y - 1 == position_p2.y ||
-            position_p1.x == position_p2.x && position_p1.y + 1 == position_p2.y ||
-            position_p1.x - 1 == position_p2.x && position_p1.y == position_p2.y ||
-            position_p1.x + 1 == position_p2.x && position_p1.y == position_p2.y
-        )
-    }
+
 
 }

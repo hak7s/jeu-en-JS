@@ -57,7 +57,6 @@ class Map {
             let tr = $('<tr/>')
             for (let x = 0; x < this.numberOfCells; x++) {
                 let td = $('<td/>')
-
                     .data('x', x)
                     .data('y', y)
                     .click(event => {})
