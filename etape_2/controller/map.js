@@ -43,21 +43,6 @@ class Map {
         // on affiche dès le début la portée des déplacements du joueur ,pour ca il nous faut la position du joueur
         this.showRange(this.players[this.currentPlayer].position)
 
-        // le joueur 1 (0 dans le tableau des joueur) attaque
-        $('.attaque-p1').click(() => {
-            this.attaque(0)
-        })
-        $('.attaque-p2').click(() => {
-            this.attaque(1)
-        })
-
-        // le joueur 1 (0 dans le tableau des joueur) se defend
-        $('.defendre-p1').click(() => {
-            this.defendre(0)
-        })
-        $('.defendre-p2').click(() => {
-            this.defendre(1)
-        })
 
         //modal
         $("#info .modal-body").html("Le joueur " + (this.currentPlayer + 1) + " commence")
@@ -65,34 +50,7 @@ class Map {
             show: true
         })
     }
-    //test
 
-    attaque(player) { // cette fonction permet au joueur courrant d attaquer l autre
-        // le joueur qui attaque (player) attaque si ...
-        if (this.fight) { // il y a un combat
-
-            // On peut selectionner le joueur opposé avec cette simple condition
-            let ennemi
-            if (player == 0) // si le joueur qui attaque est le joueur 0, son ennemi est le joueur 1
-                ennemi = 1
-            else
-                ennemi = 0
-            if (this.players[ennemi].defendre) { // si l ennemi se defend
-                this.players[ennemi].sante -= this.players[player].arme.degat / 2 // les dégats qu on lui inflige sont divisé par deux ...
-                this.players[ennemi].defendre = false // et il ne se defend plus
-            } else {
-                this.players[ennemi].sante -= this.players[player].arme.degat // sinon, il prend tous les dégats
-            }
-            this.getNextPlayer() // on change de joueur
-            $('.sante-p' + (ennemi + 1)).html(this.players[ennemi].sante) // et on met a jour la santé de l ennemi (la seule santé qui a été modifié)
-        }
-
-    }
-    defendre(player) { // cette fonction permet au joueur courrant de se défendre
-        this.players[player].defendre = true // sinon, le joueur se defend
-        this.getNextPlayer() // on change de joueur
-
-    }
 
     // Cette fonction showRange(position) permet d affiche la portée des déplacements un joueur
     showRange(position) {
@@ -145,31 +103,21 @@ class Map {
                         let x = $(event.target).data('x');
                         let y = $(event.target).data('y');
 
-                        if (!this.fight) {
-                            // récupères les déplacements possible
-                            let moves = this.getMoves(this.players[this.currentPlayer].position);
+                        // récupères les déplacements possible
+                        let moves = this.getMoves(this.players[this.currentPlayer].position);
 
-                            // moves.some permet de vérifer si la celulle cliquée fait parties des déplacements possibles
-                            if (moves.some(move => {
-                                    return move.x === x && move.y === y
-                                })) {
-                                let selectedPosition = {
-                                    x: x,
-                                    y: y
-                                }
-
-                                this.movePlayers(selectedPosition)
-                                if (this.playerJuxtapose()) {
-                                    this.fight = true
-                                    $("#joueur" + (this.currentPlayer + 1) + " button").show()
-                                    $("#info .modal-body").html("Le joueur " + (this.currentPlayer + 1) + " lance un combat")
-                                    $("#info").modal({
-                                        show: true
-                                    })
-                                }
-                                if (!this.fight)
-                                    this.getNextPlayer() // change de joueur               
+                        // moves.some permet de vérifer si la celulle cliquée fait parties des déplacements possibles
+                        if (moves.some(move => {
+                                return move.x === x && move.y === y
+                            })) {
+                            let selectedPosition = {
+                                x: x,
+                                y: y
                             }
+
+                            this.movePlayers(selectedPosition)
+
+                            this.getNextPlayer() // change de joueur               
                         }
 
                     })
@@ -252,35 +200,7 @@ class Map {
 
     // change de joueur et vérifie si il y a un gagnant
     getNextPlayer() {
-        if (this.fight) { // si il y  a un combat
-            let ennemi
-            if (this.currentPlayer == 0)
-                ennemi = 1
-            else
-                ennemi = 0
 
-            // cache et affiche les bouton de chaque joueur suivant l'action
-            $("#joueur" + (ennemi + 1) + " button").show()
-            $("#joueur" + (this.currentPlayer + 1) + " button").hide()
-
-            this.winner = null // le winner n est pas défini
-            if (this.players[0].sante <= 0) { // si la santé du premier joueur est a 0 ou en dessous
-                this.winner = 1 // l opposant gagne
-            }
-            if (this.players[1].sante <= 0) { // et vice versa
-                this.winner = 0
-            }
-            if (this.winner !== null) { // si il y a un winner (donc que l un des deux joueurs à une santé <= 0)
-
-                $("#info .modal-body").html("Le joueur " + (this.winner + 1) + " a gagner")
-                $("#info").modal({
-                    show: true
-                })
-                this.currentPlayer = -1 // comme ca on est sur que plus personne peut jouer
-                return
-
-            }
-        }
         this.currentPlayer++
         if (this.currentPlayer >= this.players.length) {
             this.currentPlayer = 0

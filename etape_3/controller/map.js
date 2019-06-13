@@ -65,7 +65,6 @@ class Map {
             show: true
         })
     }
-    //test
 
     attaque(player) { // cette fonction permet au joueur courrant d attaquer l autre
         // le joueur qui attaque (player) attaque si ...
