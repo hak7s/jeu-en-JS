@@ -16,26 +16,26 @@ class Map {
         }
 
         //creation des joueurs
-        this.positionElement(new Player('player1  player armes1',100)); 
-        this.positionElement(new Player('player2 player armes1_1',100));
+        this.positionElement(new Player('player1  player armes1', 100));
+        this.positionElement(new Player('player2 player armes1_1', 100));
 
         //creation des armes
-        this.positionElement(new Arme('armes2',15,'Fusil'));
-        this.positionElement(new Arme('armes3',20,'Fusil à pompe'));
-        this.positionElement(new Arme('armes4',25,'Lance-roquette'));
-        
+        this.positionElement(new Arme('armes2', 15, 'Fusil'));
+        this.positionElement(new Arme('armes3', 20, 'Fusil à pompe'));
+        this.positionElement(new Arme('armes4', 25, 'Lance-roquette'));
+
         //Filtre les joueurs present dans le tableau element
         this.players = this.elements.filter(function (element) {
-                return element instanceof Player
-            })
+            return element instanceof Player
+        })
 
-        this.players[0].ajouteArme(new Arme('armes1',10,'Revolver',this.players[0].position))
+        this.players[0].ajouteArme(new Arme('armes1', 10, 'Revolver', this.players[0].position))
         $('.sante-p1').html(this.players[0].sante)
-        $('.arme-p1').html(this.players[0].arme.name + " " +this.players[0].arme.degat+" degats")
+        $('.arme-p1').html(this.players[0].arme.name + " " + this.players[0].arme.degat + " degats")
 
-        this.players[1].ajouteArme(new Arme('armes1_1',10,'Revolver',this.players[1].position))
+        this.players[1].ajouteArme(new Arme('armes1_1', 10, 'Revolver', this.players[1].position))
         $('.sante-p2').html(this.players[1].sante)
-        $('.arme-p2').html(this.players[1].arme.name+ " " +this.players[1].arme.degat+" degats")
+        $('.arme-p2').html(this.players[1].arme.name + " " + this.players[1].arme.degat + " degats")
 
         //Quel joueur debute la partie
         this.currentPlayer = Math.floor(Math.random() * this.players.length)
@@ -44,22 +44,33 @@ class Map {
         this.showRange(this.players[this.currentPlayer].position)
 
         // le joueur 1 (0 dans le tableau des joueur) attaque
-        $('.attaque-p1').click(() => {this.attaque(0)})
-        $('.attaque-p2').click(() => {this.attaque(1)})
+        $('.attaque-p1').click(() => {
+            this.attaque(0)
+        })
+        $('.attaque-p2').click(() => {
+            this.attaque(1)
+        })
 
         // le joueur 1 (0 dans le tableau des joueur) se defend
-        $('.defendre-p1').click(() => {this.defendre(0)})
-        $('.defendre-p2').click(() => {this.defendre(1)})
+        $('.defendre-p1').click(() => {
+            this.defendre(0)
+        })
+        $('.defendre-p2').click(() => {
+            this.defendre(1)
+        })
 
         //modal
-        $("#info .modal-body").html("Le joueur "+(this.currentPlayer+1)+" commence")
-        $("#info").modal({show:true})
+        $("#info .modal-body").html("Le joueur " + (this.currentPlayer + 1) + " commence")
+        $("#info").modal({
+            show: true
+        })
     }
-    
+    //test
+
     attaque(player) { // cette fonction permet au joueur courrant d attaquer l autre
         // le joueur qui attaque (player) attaque si ...
         if (this.fight) { // il y a un combat
-           
+
             // On peut selectionner le joueur opposé avec cette simple condition
             let ennemi
             if (player == 0) // si le joueur qui attaque est le joueur 0, son ennemi est le joueur 1
@@ -101,7 +112,7 @@ class Map {
             }
         }
         this.players[this.currentPlayer].arme = newArme //changement armes
-        $(".arme-p" + (this.currentPlayer + 1)).html(newArme.name + " " +newArme.degat+" degats")
+        $(".arme-p" + (this.currentPlayer + 1)).html(newArme.name + " " + newArme.degat + " degats")
         $(this.getCell(oldArme.position)).addClass(oldArme.classCss) // changement armes sur le plateau
     }
 
@@ -119,7 +130,7 @@ class Map {
             this.switchArmes(newArme, armePlayers)
         }
     }
-    
+
     createMap() { // créer la carte et gere les actions qui peuvent etre executées sur la carte (click)
         let table = $('<table/>')
         for (let y = 0; y < this.numberOfLines; y++) {
@@ -150,12 +161,14 @@ class Map {
                                 this.movePlayers(selectedPosition)
                                 if (this.playerJuxtapose()) {
                                     this.fight = true
-                                    $("#joueur"+(this.currentPlayer + 1)+" button").show()
-                                    $("#info .modal-body").html("Le joueur "+(this.currentPlayer+1)+" lance un combat")
-                                    $("#info").modal({show:true})
+                                    $("#joueur" + (this.currentPlayer + 1) + " button").show()
+                                    $("#info .modal-body").html("Le joueur " + (this.currentPlayer + 1) + " lance un combat")
+                                    $("#info").modal({
+                                        show: true
+                                    })
                                 }
                                 if (!this.fight)
-                                this.getNextPlayer() // change de joueur               
+                                    this.getNextPlayer() // change de joueur               
                             }
                         }
 
@@ -174,20 +187,20 @@ class Map {
     // position du joueur aleatoire
     positionElement(element) {
         let position = this.getRandomPosition()
-        if (element instanceof Player){
-            while(this.getCellElement({
-                x:position.x,
-                y:position.y-1,
-            },Player)!=undefined || this.getCellElement({
-                x:position.x,
-                y:position.y+1,
-            },Player)!=undefined || this.getCellElement({
-                x:position.x-1,
-                y:position.y,
-            },Player)!=undefined || this.getCellElement({
-                x:position.x+1,
-                y:position.y,
-            },Player)!=undefined ){
+        if (element instanceof Player) {
+            while (this.getCellElement({
+                    x: position.x,
+                    y: position.y - 1,
+                }, Player) != undefined || this.getCellElement({
+                    x: position.x,
+                    y: position.y + 1,
+                }, Player) != undefined || this.getCellElement({
+                    x: position.x - 1,
+                    y: position.y,
+                }, Player) != undefined || this.getCellElement({
+                    x: position.x + 1,
+                    y: position.y,
+                }, Player) != undefined) {
                 position = this.getRandomPosition()
             }
         }
@@ -196,7 +209,7 @@ class Map {
 
         let cell = this.getCell(position)
         cell.addClass(element.classCss) // ajouter la class(css) className à la cellule
-        
+
     }
 
 
@@ -247,8 +260,8 @@ class Map {
                 ennemi = 0
 
             // cache et affiche les bouton de chaque joueur suivant l'action
-            $("#joueur"+(ennemi + 1)+" button").show()
-            $("#joueur"+(this.currentPlayer + 1)+" button").hide()
+            $("#joueur" + (ennemi + 1) + " button").show()
+            $("#joueur" + (this.currentPlayer + 1) + " button").hide()
 
             this.winner = null // le winner n est pas défini
             if (this.players[0].sante <= 0) { // si la santé du premier joueur est a 0 ou en dessous
@@ -257,10 +270,12 @@ class Map {
             if (this.players[1].sante <= 0) { // et vice versa
                 this.winner = 0
             }
-            if (this.winner !==null) { // si il y a un winner (donc que l un des deux joueurs à une santé <= 0)
+            if (this.winner !== null) { // si il y a un winner (donc que l un des deux joueurs à une santé <= 0)
 
-                $("#info .modal-body").html("Le joueur "+(this.winner+1)+" a gagner")
-                $("#info").modal({show:true})
+                $("#info .modal-body").html("Le joueur " + (this.winner + 1) + " a gagner")
+                $("#info").modal({
+                    show: true
+                })
                 this.currentPlayer = -1 // comme ca on est sur que plus personne peut jouer
                 return
 
