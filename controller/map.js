@@ -59,8 +59,7 @@ class Map {
     attaque(player) { // cette fonction permet au joueur courrant d attaquer l autre
         // le joueur qui attaque (player) attaque si ...
         if (this.fight) { // il y a un combat
-            if (player != this.currentPlayer) return // si le joueur attaque alors que ce n est pas son tour de jeu, on sort de la fonction
-
+           
             // On peut selectionner le joueur opposé avec cette simple condition
             let ennemi
             if (player == 0) // si le joueur qui attaque est le joueur 0, son ennemi est le joueur 1
@@ -171,7 +170,6 @@ class Map {
             }
             table.append(tr)
         }
-
         $('#container').append(table)
     }
 
@@ -323,12 +321,21 @@ class Map {
             }
         }
         for (let y = position.y + 1; y <= position.y + 3; y++) {
+<<<<<<< Updated upstream
             if (y < this.numberOfLines) { // si on ne sort pas du plateau de jeu
                 let cell = this.getCell({
                     x: position.x,
                     y: y,
                 }) // on recupe la cellule qu on analyse
                 if ($(cell).hasClass('black') || $(cell).hasClass('player')) break // si la case est occupée, pas besoin de checker les cases plus a gauche: le joueur est bloqué ici, on sort donc du for
+=======
+            if ( y < this.numberOfLines) { // si on ne sort pas du plateau de jeu
+                    let cell = this.getCell({
+                        x: position.x,
+                        y: y,
+                    }) // on recupe la cellule qu on analyse
+                if ($(cell).hasClass('black') || $(cell).hasClass('player')) break 
+>>>>>>> Stashed changes
                 else moves.push({
                     x: position.x,
                     y: y,
