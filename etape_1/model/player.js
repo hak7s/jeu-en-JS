@@ -1,10 +1,10 @@
 class Player extends ElementMap {
-    constructor (classCss, sante) {
+    constructor(classCss, sante) {
         super(classCss);
         this.sante = sante;
-        this.defendre=false
+        this.defendre = false
     }
-    ajouteArme(arme){
-        this.arme=arme
+    ajouteArme(arme) {
+        this.arme = arme
     }
 }
