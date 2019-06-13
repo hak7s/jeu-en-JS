@@ -78,8 +78,6 @@ class Map {
 
     }
     defendre(player) { // cette fonction permet au joueur courrant de se défendre
-        if (!this.fight) return /// si pas de combat, on sort de la fonction
-        if (player != this.currentPlayer) return // si ce n'est pas le tour du joueur , on sort de la fonction
         this.players[player].defendre = true // sinon, le joueur se defend
         this.getNextPlayer() // on change de joueur
 
@@ -321,21 +319,12 @@ class Map {
             }
         }
         for (let y = position.y + 1; y <= position.y + 3; y++) {
-<<<<<<< Updated upstream
             if (y < this.numberOfLines) { // si on ne sort pas du plateau de jeu
                 let cell = this.getCell({
                     x: position.x,
                     y: y,
                 }) // on recupe la cellule qu on analyse
                 if ($(cell).hasClass('black') || $(cell).hasClass('player')) break // si la case est occupée, pas besoin de checker les cases plus a gauche: le joueur est bloqué ici, on sort donc du for
-=======
-            if ( y < this.numberOfLines) { // si on ne sort pas du plateau de jeu
-                    let cell = this.getCell({
-                        x: position.x,
-                        y: y,
-                    }) // on recupe la cellule qu on analyse
-                if ($(cell).hasClass('black') || $(cell).hasClass('player')) break 
->>>>>>> Stashed changes
                 else moves.push({
                     x: position.x,
                     y: y,
