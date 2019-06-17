@@ -24,7 +24,6 @@ Probleme:
 Solution:
 - en générerant une nouvelle position aléatoire tant que la position généré est une case occupée
 
-
 Probleme:
 - les joueurs peuvent etre sur la case juste a coté au début
 Solution:

@@ -1,5 +1,5 @@
 (function ($) {
 
-    let controller = new Controller()
+    let map = new Map()
 
 })(jQuery)
