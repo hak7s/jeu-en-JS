@@ -40,13 +40,6 @@ class Map {
         //Quel joueur debute la partie
         this.currentPlayer = Math.floor(Math.random() * this.players.length)
 
-
-
-        //modal
-        $("#info .modal-body").html("Le joueur " + (this.currentPlayer + 1) + " commence")
-        $("#info").modal({
-            show: true
-        })
     }
 
 

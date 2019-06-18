@@ -9,7 +9,8 @@ td {
     background-color: white;
 }
 body{
-    background-color: white
+    background-color: white;
+    overflow: hidden
 }
 .center-game{
     left: 50%;
