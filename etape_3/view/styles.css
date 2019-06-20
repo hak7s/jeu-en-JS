@@ -8,28 +8,29 @@ td {
     transition: all .3s linear;
     background-color: white;
 }
-body{
+
+body {
     background-color: white;
     overflow: hidden
 }
-.center-game{
-    left: 50%;
-    position: relative;
-    margin-left: -250px;
-}
+
+
 .nav-bar {
     background-color: #57a6dd;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 
 }
+
 td:hover {
     background: green;
     cursor: pointer;
 }
+
 .range {
     background-color: grey
 }
+
 .black {
     background-color: black;
 }
@@ -39,10 +40,11 @@ td:hover {
 }
 
 .player2 {
-    background-color:#67eaca;
+    background-color: #67eaca;
 }
 
-.armes1,.armes1_1 {
+.armes1,
+.armes1_1 {
     background-image: url(./../img/arme1.png);
 }
 
