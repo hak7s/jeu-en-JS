@@ -2,6 +2,7 @@ class Map {
     constructor() {
         $("#joueur1 button,#joueur2 button").hide()
         this.fight = false
+        this.end = false 
         this.numberOfGreyCells = 15 // nombre de cellules grisées dans la carte
         this.numberOfLines = 10 // nombre de lignes dans la carte
         this.numberOfCells = 10 // nombre de cellules par ligne dans la carte
@@ -68,6 +69,8 @@ class Map {
 
     attaque(player) { // cette fonction permet au joueur courrant d attaquer l autre
         // le joueur qui attaque (player) attaque si ...
+        if(this.end)
+        return
         if (this.fight) { // il y a un combat
 
             // On peut selectionner le joueur opposé avec cette simple condition
@@ -88,6 +91,8 @@ class Map {
 
     }
     defendre(player) { // cette fonction permet au joueur courrant de se défendre
+        if(this.end)
+        return
         this.players[player].defendre = true // sinon, le joueur se defend
         this.getNextPlayer() // on change de joueur
 
@@ -251,6 +256,8 @@ class Map {
 
     // change de joueur et vérifie si il y a un gagnant
     getNextPlayer() {
+        if(this.end)
+        return
         if (this.fight) { // si il y  a un combat
             let ennemi
             if (this.currentPlayer == 0)
@@ -265,9 +272,11 @@ class Map {
             this.winner = null // le winner n est pas défini
             if (this.players[0].sante <= 0) { // si la santé du premier joueur est a 0 ou en dessous
                 this.winner = 1 // l opposant gagne
+                this.players[0].sante = 0
             }
             if (this.players[1].sante <= 0) { // et vice versa
                 this.winner = 0
+                this.players[1].sante = 0
             }
             if (this.winner !== null) { // si il y a un winner (donc que l un des deux joueurs à une santé <= 0)
 
@@ -275,7 +284,9 @@ class Map {
                 $("#info").modal({
                     show: true
                 })
-                this.currentPlayer = -1 // comme ca on est sur que plus personne peut jouer
+                this.end=true
+                $("#joueur" + (this.currentPlayer + 1) + " button").hide()
+                $("#joueur" + (ennemi + 1) + " button").hide()
                 return
 
             }
