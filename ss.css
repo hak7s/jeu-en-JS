@@ -1,0 +1,60 @@
+td {
+    border: 1px solid black;
+    width: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    transition: all .3s linear;
+    background-color: white;
+}
+
+body {
+    background-color: white;
+}
+
+
+.nav-bar {
+    background-color: #57a6dd;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+
+}
+
+td:hover {
+    background: green;
+    cursor: pointer;
+}
+
+.range {
+    background-color: grey
+}
+
+.black {
+    background-color: black;
+}
+
+.player1 {
+    background-color: #9ea9f0;
+}
+
+.player2 {
+    background-color: #67eaca;
+}
+
+.armes1,
+.armes1_1 {
+    background-image: url(./../img/arme1.png);
+}
+
+.armes2 {
+    background-image: url(./../img/arme2.png);
+}
+
+.armes3 {
+    background-image: url(./../img/arme3.png);
+}
+
+.armes4 {
+    background-image: url(./../img/arme4.png);
+}
